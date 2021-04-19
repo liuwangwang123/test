@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1 {
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            background-color: red;
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1"></div>
+    <a class="href" href="">https://unpkg.com/axios/dist/axios.min.js</a>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var div1 = document.getElementById("div1");
+        document.onmousemove = function (event) {
+            pos(div1, 0, 0, event);
+        }
+
+        var pos = function (o, x, y, event) { //鼠标定位赋值函数
+            var posX = 0,
+                posX = 0; //临时变量值
+            var e = event || window.event; //标准化事件对象
+            if (e.pageX || e.pageY) { //获取鼠标指针的当前坐标值
+                posX = e.pageX;
+                posY = e.pageY;
+            } else if (e.clientX || e.clientY) {
+                posX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
+                posY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
+            }
+            o.style.position = "absolute"; //定义当前对象为绝对定位
+            o.style.top = (posY + y - 30) + "px"; //用鼠标指针的y轴坐标和传入偏移值设置对象y轴坐标
+            o.style.left = (posX + x - 30) + "px"; //用鼠标指针的x轴坐标和传入偏移值设置对象x轴坐标
+        };
+        var link = document.getElementsByClassName("href");
+        for (var i = 0; i < link.length; i++) {
+            link[i].addEventListener('mouseenter', function () {
+                div1.setAttribute('class','on')
+            })
+        }
+    </script>
+</body>
+
+</html>
