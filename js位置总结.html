@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js位置</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box01 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .box {
+            padding-left: 10px;
+            margin-left: 10px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .box01 {
+            height: 6000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box01"></div>
+    <div class="box">
+        <div id="box01"></div>
+    </div>
+    <script>
+        var box01 = document.getElementById('box01');
+
+
+        /* 
+            获取网页的大小
+        */
+        /*   function getViewport(){
+              if(document.compatMode == "BackCompat"){
+                  return {
+                      width: document.body.clientWidth,
+                      height: document.body.clientHeight,
+                  }
+              }else {
+                  return {
+                      width: document.documentElement.clientWidth,
+                      height: document.documentElement.clientHeight,
+                  }
+              }
+          } */
+        /* 
+             二、获取网页元素的绝对位置
+
+            每个元素都有offsetTop和offsetLeft属性，表示该元素的左上角与父容器（offsetParent对象）左上角的距离。所以，只需要将这两个值进行累加，就可以得到该元素的绝对坐标。
+        */
+        /*  function getElementLeft(element) {
+             var actualLeft = element.offsetLeft; //表示元素到父元素的位置
+             var current = element.offsetParent; //获取到父元素
+             while (current !== null) {
+                 actualLeft += current.offsetLeft; // 对元素位置和父元素到浏览器左侧位置就行累加 求出元素的绝对位置
+                 current = current.offsetParent;
+             }
+
+             return actualLeft;
+         } */
+
+        function getElementTop(element) {
+            var actualTop = element.offsetTop;
+            var current = element.offsetParent;
+
+            while (current !== null) {
+                actualTop += current.offsetTop;
+                current = current.offsetParent;
+            }
+
+            return actualTop;
+        }
+        /* 
+            三、获取网页元素的相对位置
+            有了绝对位置以后，获得相对位置就很容易了，只要将绝对坐标减去页面的滚动条滚动的距离就可以了。滚动条滚动的垂直距离，是document对象的scrollTop属性；滚动条滚动的水平距离是document对象的scrollLeft属性。
+        
+        */
+
+        /*  function getElementViewLeft(element) {
+             var actualLeft = element.offsetLeft;
+             var current = element.offsetParent;
+
+             while (current !== null) {
+                 actualLeft += current.offsetLeft;
+                 current = current.offsetParent;
+             }
+
+             if (document.compatMode == "BackCompat") {
+                 var elementScrollLeft = document.body.scrollLeft;
+             } else {
+                 var elementScrollLeft = document.documentElement.scrollLeft;
+             }
+
+             return actualLeft - elementScrollLeft;
+         } */
+
+        /* 
+            四、获取元素位置的快速方法
+            那就是使用getBoundingClientRect()方法。它返回一个对象，其中包含了left、right、top、bottom四个属性，分别对应了该元素的左上角和右下角相对于浏览器窗口（viewport）左上角的距离。
+
+            所以，网页元素的相对位置就是
+
+　　var X= this.getBoundingClientRect().left;
+
+　　var Y =this.getBoundingClientRect().top;
+
+再加上滚动距离，就可以得到绝对位置
+
+　　var X= this.getBoundingClientRect().left+document.documentElement.scrollLeft;
+
+　　var Y =this.getBoundingClientRect().top+document.documentElement.scrollTop;
+        */
+    </script>
+</body>
+
+</html>

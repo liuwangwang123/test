@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test1" style="position:fixed"></div>
+
+    <div id="test2"></div>
+
+    <div id="div0" style="position:absolute;">
+        <div id="div1" style="position:absolute;">
+            <div id='test3'></div>
+        </div>
+    </div>
+
+    <script>
+        
+        function f1() {
+            var n01;
+            console.log(n01)
+            return function f2() {
+                console.log(n01)
+                n01 = 666;
+            }
+        }
+       
+        var result = f1();
+        result(); // 999
+
+        // 　　var name = "The Window";
+
+        // 　　var object = {
+        // 　　　　name : "My Object",
+
+        // 　　　　getNameFunc : function(){
+        // 　　　　　　var that = this;
+        // 　　　　　　return function(){
+        // 　　　　　　　　return that.name;
+        // 　　　　　　};
+
+        // 　　　　}
+
+        // 　　};
+
+        // console.log(object.getNameFunc()());
+    </script>
+</body>
+
+</html>
